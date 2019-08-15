@@ -6,6 +6,7 @@ import ControllerPanels from "./components/controller-panels";
 import GradientTransitionBg from "./components/gradient-transition-bg";
 import Main from "./components/main";
 import Cursor from "./components/cursor";
+import Nav from "./components/nav";
 import { IndexProvider } from "./state";
 import { CursorProvider } from "./state/cursor";
 
@@ -21,6 +22,7 @@ const App = () => (
         <ControllerPanels />
         <Main />
         <Cursor />
+        <Nav />
       </AppContainer>
     </IndexProvider>
   </CursorProvider>

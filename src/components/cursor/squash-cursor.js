@@ -15,12 +15,14 @@ const Cursor1 = styled.div`
   --r: ${p => `calc(var(--mouse-r-${p.refKey}, 0) * 1deg)`};
 
   position: relative;
-  height: 15px;
-  width: 15px;
+  height: 25px;
+  width: 25px;
   background-color: #fff;
   border-radius: 9999px;
   position: absolute;
   mix-blend-mode: difference;
+  opacity: ${p => (p.state === CursorStates.HOVER ? 0 : 1)};
+  transition: 0.1s opacity linear;
   transform: translate(-50%, -50%) translate(var(--x), var(--y))
     rotate(var(--r)) scale(var(--vx), var(--vy));
 `;
@@ -52,14 +54,13 @@ const Arrow = styled.div`
   transform: translate(-50%, -50%)
     ${p => {
       if (p.state === CursorStates.NEXT) {
-        return `rotate(90deg)`;
+        return `rotate(90deg) translateY(-21px)`;
       }
       if (p.state === CursorStates.PREV) {
-        return `rotate(-90deg)`;
+        return `rotate(-90deg) translateY(-21px)`;
       }
-      return `rotate(0)`;
-    }}
-    translateY(-21px);
+      return `rotate(0) translateY(0px)`;
+    }};
 `;
 
 const ArrowInner = styled.div`
@@ -116,7 +117,7 @@ const SquashCursor = ({ refKey, sourceValue, curriedSetter, state }) => {
           </Arrow>
         </ArrowBase>
       </Cursor2>
-      <Cursor1 refKey={refKey1} />
+      <Cursor1 refKey={refKey1} state={state} />
     </OpacityOnEnter>
   );
 };

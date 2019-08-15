@@ -4,7 +4,7 @@ import { CursorStates as State } from "../constants";
 const Actions = {
   SET_PREV: "setPrev",
   SET_NEXT: "setNext",
-  HIDE: "hide"
+  HOVER: "hover"
 };
 
 const reducer = (state, action) => {
@@ -14,7 +14,7 @@ const reducer = (state, action) => {
     case Actions.SET_NEXT:
       return State.NEXT;
     default:
-      return State.HIDDEN;
+      return State.HOVER;
   }
 };
 
@@ -29,7 +29,7 @@ export const CursorProvider = ({ children }) => {
       value={{
         setPrev: () => dispatch(Actions.SET_PREV),
         setNext: () => dispatch(Actions.SET_NEXT),
-        hide: () => dispatch(Actions.HIDE)
+        hover: () => dispatch(Actions.HOVER)
       }}
     >
       <CursorStateContext.Provider

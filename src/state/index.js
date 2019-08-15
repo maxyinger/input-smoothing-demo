@@ -17,12 +17,15 @@ const wrapIndex = v => {
 const IndexContext = createContext();
 
 export const IndexProvider = ({ children }) => {
-  const disabled = useRef(false);
+  const [disabled, setDisabled] = useState(false);
   const [index, setIndexUnchecked] = useState(0);
 
-  const setIndex = useCallback(fn => {
-    !disabled.current && setIndexUnchecked(v => wrapIndex(fn(v)));
-  }, []);
+  const setIndex = useCallback(
+    fn => {
+      !disabled && setIndexUnchecked(v => wrapIndex(fn(v)));
+    },
+    [disabled]
+  );
 
   const incrementIndex = useCallback(() => {
     setIndex(v => v + 1);
@@ -33,21 +36,21 @@ export const IndexProvider = ({ children }) => {
   }, [setIndex]);
 
   const disableStateUpdates = useCallback(() => {
-    disabled.current = true;
+    setDisabled(true);
   }, []);
 
   const enableStateUpdates = useCallback(() => {
-    disabled.current = false;
+    setDisabled(false);
   }, []);
 
   return (
     <IndexContext.Provider
       value={{
-        index,
         currentState: Content[Object.values(State)[index]],
         setIndex,
         incrementIndex,
         decrementIndex,
+        disabled,
         disableStateUpdates,
         enableStateUpdates
       }}

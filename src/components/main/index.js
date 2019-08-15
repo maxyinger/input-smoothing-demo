@@ -5,6 +5,7 @@ import { LINE_STAGGER, PAGE_TRANSITION_TIME } from "../../constants";
 import Content from "../../content";
 import { useIndexContext } from "../../state";
 import Fsa from "../common/full-screen-absolute";
+import NumericPagination from "./numeric-pagination";
 
 const Container = styled(Fsa)`
   pointer-events: none;
@@ -73,9 +74,35 @@ const Controller = styled.div`
 
 const HeadParingController = styled(Controller)`
   position: absolute;
+`;
+
+const ContentContainer = styled.div`
+  position: absolute;
   top: 50%;
   left: 25.5%;
   transform: translateY(-50%);
+`;
+
+const DummyHeading = styled.div`
+  position: relative;
+  ${Heading} {
+    opacity: 0;
+  }
+`;
+
+const SuperHeading = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-150%, 10px);
+  color: white;
+`;
+
+const NumericPaginationWrap = styled.div`
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: translateY(150%);
 `;
 
 const HeadPairing = ({ itemState, firstMount, active }) => {
@@ -91,6 +118,7 @@ const HeadPairing = ({ itemState, firstMount, active }) => {
 };
 
 const ContentArray = Object.values(Content);
+const ContentKeyArray = Object.keys(Content);
 
 const reducer = (state, currentState) => ({
   updated: state.updated + 1,
@@ -110,14 +138,33 @@ const Main = () => {
 
   return (
     <Container>
-      {ContentArray.map(itemState => (
-        <HeadPairing
-          key={itemState.key}
-          itemState={itemState}
-          active={state.current.key === itemState.key}
-          firstMount={firstMount}
-        />
-      ))}
+      <ContentContainer>
+        <SuperHeading>Method.</SuperHeading>
+        {ContentArray.map(itemState => (
+          <HeadPairing
+            key={itemState.key}
+            itemState={itemState}
+            active={state.current.key === itemState.key}
+            firstMount={firstMount}
+          />
+        ))}
+        <DummyHeading aria-hidden="true">
+          <div>
+            <Heading>Line</Heading>
+          </div>
+          <div>
+            <Heading>Line</Heading>
+          </div>
+        </DummyHeading>
+        <NumericPaginationWrap>
+          <NumericPagination
+            length={ContentKeyArray.length}
+            currentIndex={
+              ContentKeyArray.findIndex(key => key === state.current.key) + 1
+            }
+          />
+        </NumericPaginationWrap>
+      </ContentContainer>
     </Container>
   );
 };

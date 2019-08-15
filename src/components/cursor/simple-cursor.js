@@ -21,6 +21,13 @@ const Cursor = styled.div`
   width: 35px;
   border: 2px solid white;
   border-radius: 9999px;
+  transform-origin: 50% 50%;
+  transform: scale(${p => (p.state === CursorStates.HOVER ? 1.8 : 1)});
+  opacity: ${p => (p.state === CursorStates.HOVER ? 0.1 : 1)};
+  transition: ${p =>
+    p.state === CursorStates.HOVER
+      ? `0.3s all ${CssEase.outCirc}`
+      : `0.6s all ${CssEase.outCirc}`};
 `;
 
 const CursorTextInner = styled.div`
@@ -29,6 +36,7 @@ const CursorTextInner = styled.div`
   left: 50%;
   height: 100%;
   color: white;
+  opacity: ${p => (p.state === CursorStates.HOVER ? 0 : 1)};
   transform: translateX(-50%)
     translateY(${p => (p.state === CursorStates.PREV ? -100 : 0)}%);
   transition: 0.3s transform ${CssEase.outSine};
@@ -62,7 +70,7 @@ const SimpleCursor = ({ refKey, sourceValue, curriedSetter, state }) => {
   return (
     <OpacityOnEnter>
       <CursorWrap refKey={refKey}>
-        <Cursor />
+        <Cursor state={state} />
         <CursorText>
           <CursorTextInner state={state}>next</CursorTextInner>
           <CursorTextInner state={state}>prev</CursorTextInner>
