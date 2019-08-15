@@ -81,7 +81,7 @@ const PaginationWrap = styled.div`
 
 const PaginationInner = styled.div`
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
 `;
 
@@ -93,7 +93,7 @@ const FormidableCreditWrap = styled.div`
 
 const FormidableCredit = styled.div`
   position: absolute;
-  bottom: 0;
+  top: 0;
   right: 0;
   color: white;
   white-space: nowrap;
