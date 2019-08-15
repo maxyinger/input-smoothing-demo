@@ -3,6 +3,7 @@ import styled, { css, keyframes } from "styled-components";
 import smooth from "../../animation/smooth";
 import { CursorStates } from "../../constants";
 import pointer from "../../events/pointer";
+import OpacityOnEnter from "./opacity";
 
 const CursorWrap = styled.div`
   position: absolute;
@@ -72,7 +73,7 @@ const SimpleCursor = ({ refKey, sourceValue, curriedSetter, state }) => {
 </textPath>`;
 
   return (
-    <>
+    <OpacityOnEnter>
       <CursorWrap refKey={refKey1}>
         <Cursor1 state={state}>
           <svg
@@ -99,7 +100,7 @@ const SimpleCursor = ({ refKey, sourceValue, curriedSetter, state }) => {
       <CursorWrap refKey={refKey2}>
         <Cursor2 />
       </CursorWrap>
-    </>
+    </OpacityOnEnter>
   );
 };
 

@@ -5,6 +5,7 @@ import value from "../../animation/value";
 import { CssEase } from "../../animation/ease";
 import { CursorStates } from "../../constants";
 import pointer from "../../events/pointer";
+import OpacityOnEnter from "./opacity";
 
 const Cursor1 = styled.div`
   --x: ${p => `calc(var(--mouse-x-${p.refKey}, 0) * 1px)`};
@@ -106,7 +107,7 @@ const SquashCursor = ({ refKey, sourceValue, curriedSetter, state }) => {
   }, []); //eslint-disable-line
 
   return (
-    <>
+    <OpacityOnEnter>
       <Cursor2 refKey={refKey2}>
         <ArrowBase refKey={refKey1}>
           <Arrow state={state}>
@@ -115,7 +116,7 @@ const SquashCursor = ({ refKey, sourceValue, curriedSetter, state }) => {
         </ArrowBase>
       </Cursor2>
       <Cursor1 refKey={refKey1} />
-    </>
+    </OpacityOnEnter>
   );
 };
 
