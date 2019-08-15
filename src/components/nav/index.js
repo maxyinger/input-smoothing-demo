@@ -4,7 +4,7 @@ import Fsa from "../common/full-screen-absolute";
 import Pagination from "./pagination";
 import { useCursorDispatch } from "../../state/cursor";
 
-const TOP_BOTTOM = 100;
+const TOP_BOTTOM = "8vh";
 
 const NavWrap = styled(Fsa)`
   pointer-events: none;
@@ -12,13 +12,13 @@ const NavWrap = styled(Fsa)`
 
 const TitleWrap = styled.div`
   position: absolute;
-  top: ${TOP_BOTTOM}px;
+  top: ${TOP_BOTTOM};
   left: 12.75vw;
 `;
 
 const Title = styled.h6`
   position: absolute;
-  font-size: 1.09vw;
+  font-size: 20px;
   white-space: nowrap;
   color: white;
   bottom: 0;
@@ -28,8 +28,13 @@ const Title = styled.h6`
 
 const CreditsWrap = styled.div`
   position: absolute;
-  top: ${TOP_BOTTOM}px;
+  top: ${TOP_BOTTOM};
   left: 25.5vw;
+
+  @media screen and (max-width: 1200px) {
+    padding-top: 30px;
+    left: 12.75vw;
+  }
 `;
 
 const Credits = styled.ul`
@@ -49,7 +54,7 @@ const Credits = styled.ul`
 
 const NavLinksWrap = styled.div`
   position: absolute;
-  top: ${TOP_BOTTOM}px;
+  top: ${TOP_BOTTOM};
   right: 12.75vw;
 `;
 
@@ -70,7 +75,7 @@ const NavLinks = styled.div`
 
 const PaginationWrap = styled.div`
   position: absolute;
-  bottom: ${TOP_BOTTOM}px;
+  bottom: ${TOP_BOTTOM};
   left: 12.5vw;
 `;
 
@@ -82,7 +87,7 @@ const PaginationInner = styled.div`
 
 const FormidableCreditWrap = styled.div`
   position: absolute;
-  bottom: ${TOP_BOTTOM}px;
+  bottom: ${TOP_BOTTOM};
   right: 12.5vw;
 `;
 
@@ -143,16 +148,18 @@ const Nav = () => {
       </CreditsWrap>
       <NavLinksWrap>
         <NavLinks>
-          <a href="#" onMouseOver={hover}>
+          <a tabIndex={1} href="#" onMouseOver={hover}>
             Article
           </a>
           <a
+            tabIndex={1}
             href="https://github.com/littlemilkstudio/input-smoothing-demo"
             onMouseOver={hover}
           >
             Github
           </a>
           <a
+            tabIndex={1}
             href="https://codepen.io/littlemilk/pen/ZgvJym"
             onMouseOver={hover}
           >
@@ -172,7 +179,7 @@ const Nav = () => {
             🍕
           </span>{" "}
           by{" "}
-          <a href="https://formidable.com/" onMouseOver={hover}>
+          <a tabIndex={3} href="https://formidable.com/" onMouseOver={hover}>
             Formidable
           </a>
         </FormidableCredit>

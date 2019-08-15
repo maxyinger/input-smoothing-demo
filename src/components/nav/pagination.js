@@ -8,7 +8,7 @@ const Container = styled.div`
   white-space: nowrap;
 `;
 
-const PageBubble = styled.div`
+const PageBubble = styled.a`
   display: inline-block;
   height: 8px;
   width: 8px;
@@ -33,10 +33,15 @@ const Pagination = () => {
       {Object.keys(Content).map((key, i) => (
         <PageBubble
           key={key}
+          tabIndex={2}
+          href="#"
           active={key === currentState.key}
           disabled={disabled}
           onMouseOver={hover}
-          onClick={() => setIndex(_ => i)}
+          onClick={e => {
+            e.preventDefault();
+            setIndex(_ => i);
+          }}
         />
       ))}
     </Container>
