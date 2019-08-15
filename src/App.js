@@ -1,24 +1,29 @@
 import React from "react";
-import { IndexProvider } from "./state";
 import styled from "styled-components";
-import GradientTransitionBg from "./components/gradient-transition-bg";
-import ControllerPanels from "./components/controller-panels";
-import Fsa from "./components/common/full-screen-absolute";
-import Content from "./components/content";
 import "./App.css";
+import Fsa from "./components/common/full-screen-absolute";
+import ControllerPanels from "./components/controller-panels";
+import GradientTransitionBg from "./components/gradient-transition-bg";
+import Main from "./components/main";
+import Cursor from "./components/cursor";
+import { IndexProvider } from "./state";
+import { CursorProvider } from "./state/cursor";
 
 const AppContainer = styled(Fsa)`
   overflow: hidden;
 `;
 
 const App = () => (
-  <IndexProvider>
-    <AppContainer>
-      <GradientTransitionBg />
-      <ControllerPanels />
-      <Content />
-    </AppContainer>
-  </IndexProvider>
+  <CursorProvider>
+    <IndexProvider>
+      <AppContainer>
+        <GradientTransitionBg />
+        <ControllerPanels />
+        <Main />
+        <Cursor />
+      </AppContainer>
+    </IndexProvider>
+  </CursorProvider>
 );
 
 export default App;

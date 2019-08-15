@@ -1,8 +1,6 @@
-const lerp = percent => (start, end) => {
-  return Object.keys(start).reduce((acc, key) => {
-    const delta = end[key] - start[key];
-    acc[key] = start[key] + delta * percent;
-
+const lerp = roundness => (accum, target) => {
+  return Object.keys(accum).reduce((acc, key) => {
+    acc[key] = (1 - roundness) * accum[key] + target[key] * roundness;
     return acc;
   }, {});
 };

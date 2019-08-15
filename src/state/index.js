@@ -2,25 +2,17 @@ import React, {
   createContext,
   useContext,
   useState,
-  useEffect,
   useCallback,
   useRef
 } from "react";
-
-export const State = {
-  SIMPLE: "simple",
-  STRETCH: "stretch",
-  DOUBLE: "double"
-};
+import { AppStates as State } from "../constants";
+import Content from "../content";
 
 const NumSlides = Object.keys(State).length;
 
 const wrapIndex = v => {
   return ((v % NumSlides) + NumSlides) % NumSlides;
 };
-
-const BackgroundColors = ["#0e1fef", "#ec8632", "#e63323"];
-// const BackgroundColors = ["#2E4036", "#033F63", "#F06543"];
 
 const IndexContext = createContext();
 
@@ -52,8 +44,8 @@ export const IndexProvider = ({ children }) => {
     <IndexContext.Provider
       value={{
         index,
+        currentState: Content[Object.values(State)[index]],
         setIndex,
-        backgroundColor: BackgroundColors[index],
         incrementIndex,
         decrementIndex,
         disableStateUpdates,

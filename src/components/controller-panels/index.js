@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { useIndexContext } from "../../state";
+import { useCursorDispatch } from "../../state/cursor";
 import Fsa from "../common/full-screen-absolute";
 
 const panelStyles = css`
@@ -28,10 +29,11 @@ const ControllerPrev = styled.div`
 
 const ControllerPanels = () => {
   const { incrementIndex, decrementIndex } = useIndexContext();
+  const { setPrev, setNext } = useCursorDispatch();
   return (
     <Fsa>
-      <ControllerPrev onClick={decrementIndex} />
-      <ControllerNext onClick={incrementIndex} />
+      <ControllerPrev onClick={decrementIndex} onMouseOver={setPrev} />
+      <ControllerNext onClick={incrementIndex} onMouseOver={setNext} />
     </Fsa>
   );
 };

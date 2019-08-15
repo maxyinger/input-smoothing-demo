@@ -1,1 +1,0 @@
-export const PAGE_TRANSITION_TIME = 2000;

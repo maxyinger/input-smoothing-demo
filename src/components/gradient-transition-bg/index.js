@@ -29,11 +29,11 @@ const Bg = styled.div`
 const GradientTransitionBg = () => {
   const container = useRef();
   const {
-    backgroundColor,
+    currentState,
     disableStateUpdates,
     enableStateUpdates
   } = useIndexContext();
-  const [previousColor, setPreviousColor] = useState(backgroundColor);
+  const [previousState, setPreviousState] = useState(currentState);
 
   const updateProgress = v => {
     const containerTag = container.current;
@@ -43,11 +43,11 @@ const GradientTransitionBg = () => {
   };
 
   useEffect(() => {
-    if (backgroundColor === previousColor) return;
+    if (currentState.key === previousState.key) return;
 
     const onComplete = () => {
       updateProgress(0);
-      setPreviousColor(backgroundColor);
+      setPreviousState(currentState);
       enableStateUpdates();
     };
 
@@ -61,20 +61,13 @@ const GradientTransitionBg = () => {
     }).start(v => {
       updateProgress(v.progress);
     });
-  }, [backgroundColor, disableStateUpdates, enableStateUpdates, previousColor]);
+  }, [currentState, disableStateUpdates, enableStateUpdates, previousState]);
 
   return (
     <Container ref={container}>
       <Bg
-        startColor={previousColor}
-        endColor={backgroundColor}
-        background={`
-          linear-gradient(
-            to top,
-            ${backgroundColor} 33.333%,
-            ${previousColor} 66.666%
-          );
-        `}
+        startColor={previousState.backgroundColor}
+        endColor={currentState.backgroundColor}
       />
     </Container>
   );

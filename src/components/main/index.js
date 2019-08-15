@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import styled, { css, keyframes } from "styled-components";
-import Fsa from "../common/full-screen-absolute";
+import { CssEase } from "../../animation/ease";
+import { LINE_STAGGER, PAGE_TRANSITION_TIME } from "../../constants";
+import Content from "../../content";
 import { useIndexContext } from "../../state";
-import { PAGE_TRANSITION_TIME } from "../../constants";
-
-const LINE_STAGGER = 50;
+import Fsa from "../common/full-screen-absolute";
 
 const Container = styled(Fsa)`
   pointer-events: none;
@@ -53,7 +53,7 @@ const Controller = styled.div`
               ${p.firstMount
                 ? 0
                 : ((PAGE_TRANSITION_TIME * 5) / 6 - LINE_STAGGER) / 1000}s
-              cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+              ${CssEase.outCirc} forwards;
             animation-delay: ${PAGE_TRANSITION_TIME / 3 / 1000}s;
           }
 
@@ -67,7 +67,7 @@ const Controller = styled.div`
             transform: translateY(${p.firstMount ? -110 : 0}%);
             animation: ${exitFrames}
               ${((PAGE_TRANSITION_TIME * 1) / 3 - LINE_STAGGER) / 1000}s
-              cubic-bezier(0.785, 0.135, 0.15, 0.86) forwards;
+              ${CssEase.inOutCirc} forwards;
           }
         `};
 `;
@@ -79,15 +79,11 @@ const HeadParingController = styled(Controller)`
   transform: translateY(-50%);
 `;
 
-const HeadPairing = ({ lines, active, wasActive, firstMount }) => {
+const HeadPairing = ({ itemState, firstMount, active }) => {
   return (
-    <HeadParingController
-      active={active}
-      wasActive={wasActive}
-      firstMount={firstMount}
-    >
-      {lines.map((line, i) => (
-        <LineHidden key={`${line}-${i}`}>
+    <HeadParingController active={active} firstMount={firstMount}>
+      {itemState.headline.map(line => (
+        <LineHidden key={`${itemState.key}-${line}`}>
           <Heading>{line}</Heading>
         </LineHidden>
       ))}
@@ -95,34 +91,36 @@ const HeadPairing = ({ lines, active, wasActive, firstMount }) => {
   );
 };
 
-const reducer = (state, index) => ({ current: index, previous: state.current });
+const ContentArray = Object.values(Content);
 
-const Content = () => {
-  const { index } = useIndexContext();
-  const [state, dispatch] = useReducer(reducer, 0);
-  useEffect(() => dispatch(index), [index]);
+const reducer = (state, currentState) => ({
+  updated: state.updated + 1,
+  current: currentState,
+  previous: state.current
+});
 
-  const firstMount = isNaN(state.previous);
+const Main = () => {
+  const { currentState } = useIndexContext();
+  const [state, dispatch] = useReducer(reducer, {
+    current: currentState,
+    updated: 0
+  });
+  useEffect(() => dispatch(currentState), [currentState]);
+
+  const firstMount = state.updated <= 1;
 
   return (
     <Container>
-      <HeadPairing
-        lines={["Simple", "& Smooth"]}
-        active={state.current === 0}
-        firstMount={firstMount}
-      />
-      <HeadPairing
-        lines={["Squash", "& Stretch"]}
-        active={state.current === 1}
-        firstMount={firstMount}
-      />
-      <HeadPairing
-        lines={["Playful", "& Double"]}
-        active={state.current === 2}
-        firstMount={firstMount}
-      />
+      {ContentArray.map(itemState => (
+        <HeadPairing
+          key={itemState.key}
+          itemState={itemState}
+          active={state.current.key === itemState.key}
+          firstMount={firstMount}
+        />
+      ))}
     </Container>
   );
 };
 
-export default Content;
+export default Main;
