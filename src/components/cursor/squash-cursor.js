@@ -15,8 +15,8 @@ const Cursor1 = styled.div`
   --r: ${p => `calc(var(--mouse-r-${p.refKey}, 0) * 1deg)`};
 
   position: relative;
-  height: 60px;
-  width: 60px;
+  height: 15px;
+  width: 15px;
   background-color: #fff;
   border-radius: 9999px;
   position: absolute;
@@ -30,7 +30,8 @@ const Cursor2 = styled.div`
   --y: ${p => `calc(var(--mouse-y-${p.refKey}, 0) * 1px)`};
 
   position: absolute;
-  transform: translate(-50%, -50%) translate(var(--x), var(--y));
+  opacity: 0.18;
+  transform: translate(-50%, -50%) translate(var(--x), var(--y)) scale(0.8);
 `;
 
 const ArrowBase = styled.div`

@@ -45,10 +45,10 @@ const SimpleCursor = ({ refKey, sourceValue, curriedSetter, state }) => {
   const refKey2 = `${refKey}-2`;
 
   useEffect(() => {
-    const s1 = smooth(sourceValue.getCurrent(), { roundness: 0.065 }).start(
+    const s1 = smooth(sourceValue.getCurrent(), { roundness: 0.12 }).start(
       curriedSetter(refKey1)
     );
-    const s2 = smooth(sourceValue.getCurrent(), { roundness: 0.09 }).start(
+    const s2 = smooth(sourceValue.getCurrent(), { roundness: 0.065 }).start(
       curriedSetter(refKey2)
     );
     const p = pointer(sourceValue.getCurrent()).start(v => {

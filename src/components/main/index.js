@@ -16,7 +16,6 @@ const LineHidden = styled.div`
 
 const lineStyles = css`
   line-height: 1;
-  pointer-events: auto;
   white-space: nowrap;
   will-change: transform;
   transform: translateY(-120%);
