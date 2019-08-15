@@ -148,7 +148,11 @@ const Nav = () => {
       </CreditsWrap>
       <NavLinksWrap>
         <NavLinks>
-          <a tabIndex={1} href="#" onMouseOver={hover}>
+          <a
+            tabIndex={1}
+            href="https://www.formidable.com/blog/2019/input-smoothing/"
+            onMouseOver={hover}
+          >
             Article
           </a>
           <a
