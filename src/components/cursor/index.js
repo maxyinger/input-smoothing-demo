@@ -6,6 +6,7 @@ import pointer from "../../events/pointer";
 import { curriedCssVarSetter } from "../../utils";
 import SimpleCursor from "./simple-cursor";
 import SquashCursor from "./squash-cursor";
+import DoubleCursor from "./double-cursor";
 import { useCursorState } from "../../state/cursor";
 import { useIndexContext } from "../../state";
 import { AppStates } from "../../constants";
@@ -46,6 +47,14 @@ const Cursor = () => {
           [AppStates.STRETCH]: (
             <SquashCursor
               refKey={AppStates.STRETCH}
+              state={state}
+              sourceValue={sourceValue}
+              curriedSetter={curriedCssVarSetter(ref)}
+            />
+          ),
+          [AppStates.DOUBLE]: (
+            <DoubleCursor
+              refKey={AppStates.DOUBLE}
               state={state}
               sourceValue={sourceValue}
               curriedSetter={curriedCssVarSetter(ref)}

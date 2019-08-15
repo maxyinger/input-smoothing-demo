@@ -45,7 +45,7 @@ const Arrow = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  transition: 0.3s transform ${CssEase.inOutCirc};
+  transition: 0.6s transform ${CssEase.inOutQuint};
   transform-origin: 50% 50%;
   transform: translate(-50%, -50%)
     ${p => {
