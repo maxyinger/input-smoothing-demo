@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2c165050d4438b008e25a9643cd4d7df",
+    "revision": "6162795586d333848bbbffde3ddcfff5",
     "url": "/input-smoothing-demo/index.html"
   },
   {
