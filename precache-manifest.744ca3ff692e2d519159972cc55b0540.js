@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7d1ead7cabd2281e09d4e24c5a99dd96",
+    "revision": "2c165050d4438b008e25a9643cd4d7df",
     "url": "/input-smoothing-demo/index.html"
   },
   {
-    "revision": "35f6877b13291d76a43c",
+    "revision": "04ceb4f3bea18b0e2f95",
     "url": "/input-smoothing-demo/static/css/main.7a5b53ea.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/input-smoothing-demo/static/js/2.b2b16714.chunk.js"
   },
   {
-    "revision": "35f6877b13291d76a43c",
-    "url": "/input-smoothing-demo/static/js/main.63c1b989.chunk.js"
+    "revision": "04ceb4f3bea18b0e2f95",
+    "url": "/input-smoothing-demo/static/js/main.3fe6b770.chunk.js"
   },
   {
     "revision": "f3eb8baa581e5cb916f7",
